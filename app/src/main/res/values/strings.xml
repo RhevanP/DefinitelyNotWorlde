@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Definitely Not Worlde</string>
+    <string name="fill_boxes">A</string>
+    <string name="enter_your_guess">Enter your guess</string>
+    <string name="actionCue">What word is it now...</string>
+    <string name="buttonText">Ok</string>
+    <string name="empty_input">Your input was empty</string>
+    <string name="empty_input_message">You can\'t let the cases empty</string>
+    <string name="lower_input">You haven\'t completed the word</string>
+    <string name="lower_input_message">The word you enter should be of 5 letters. Not less.</string>
+</resources>
