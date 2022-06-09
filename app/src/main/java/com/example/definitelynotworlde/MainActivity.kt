@@ -77,9 +77,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        //TODO : Export all the code from mainActivity listener buttonValidate to the ButtonManager
         //TODO : The keyboard is opening on numbers and NOT on letters
+        //TODO : The focus doesn't change to the new line as expected
         //TODO : Center the view when the inputs are BELOW the keyboard for the user
+        //TODO : Alert Manager should be saying the length of the word, not 5 by default.
         //TODO : The first input ALSO HAS to be a capital letter in the table creation
         //TODO : increase the number of words available
         //TODO : Banners at the top instead of the text

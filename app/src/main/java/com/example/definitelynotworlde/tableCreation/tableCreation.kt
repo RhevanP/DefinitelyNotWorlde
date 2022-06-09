@@ -71,10 +71,11 @@ class tableCreation {
 
         fun SetupInputText(InputText: EditText, lengthOfWord: Int){
             InputText.setHint(R.string.fill_boxes)
+            InputText.isAllCaps = true
+            InputText.setRawInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS)
             InputText.textSize = pixelConverterFromDP(20f).toFloat()
             InputText.width = pixelConverterFromDP(60f*5/lengthOfWord)
             InputText.height = pixelConverterFromDP(100f)
-            InputText.setRawInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS)
             InputText.charactersOnly()
             InputText.setMaxLength(2)
             InputText.gravity = Gravity.CENTER
@@ -94,7 +95,6 @@ class tableCreation {
 
                 var newUserInputTextField = EditText(newTableRow.context)
                 SetupInputText(newUserInputTextField, lengthOfWord) // Take care of all the formatting
-                newUserInputTextField.id = i
 
                 //For the click to force the input to be at the end of the case
                 newUserInputTextField.setOnClickListener(View.OnClickListener {
@@ -120,12 +120,12 @@ class tableCreation {
                     }
                 })
 
-                newUserInputTextField.setOnFocusChangeListener(object : View.OnFocusChangeListener {
-                    override fun onFocusChange(p0: View?, p1: Boolean) {
-                        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                        imm.showSoftInput(newUserInputTextField, InputMethodManager.SHOW_IMPLICIT)
-                    }
-                })
+//                newUserInputTextField.setOnFocusChangeListener(object : View.OnFocusChangeListener {
+//                    override fun onFocusChange(p0: View?, p1: Boolean) {
+//                        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+////                        imm.showInputMethodPicker()
+//                    }
+//                })
 
                 //Add the row to the table
                 newTableRow.addView(newUserInputTextField, i)
