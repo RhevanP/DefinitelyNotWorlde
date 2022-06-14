@@ -13,9 +13,9 @@ class alertManager(buttonValidation: ImageButton) {
         alertUser.setMessage(R.string.empty_input_message)
         alertUser.show()
     }
-    fun inputSizeLower(alertUser: AlertDialog.Builder){
+    fun inputSizeLower(alertUser: AlertDialog.Builder, wordLength: Int){
         alertUser.setTitle(R.string.lower_input)
-        alertUser.setMessage(R.string.lower_input_message)
+        alertUser.setMessage("Your word does not have $wordLength letters")
         alertUser.show()
     }
 }

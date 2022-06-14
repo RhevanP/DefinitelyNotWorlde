@@ -7,5 +7,4 @@
     <string name="empty_input">Your input was empty</string>
     <string name="empty_input_message">You can\'t let the cases empty</string>
     <string name="lower_input">You haven\'t completed the word</string>
-    <string name="lower_input_message">The word you enter should be of 5 letters. Not less.</string>
 </resources>
