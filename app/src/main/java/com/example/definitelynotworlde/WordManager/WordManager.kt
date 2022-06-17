@@ -5,6 +5,7 @@ import android.widget.TableLayout
 import android.widget.EditText
 import android.widget.TableRow
 import androidx.core.view.children
+import java.lang.StringBuilder
 
 class WordManager {
     var wordToGuess: String = ""
@@ -16,10 +17,16 @@ class WordManager {
     var userGuessList: MutableList<String> = mutableListOf()
     var userGuessString: String = ""
 
+    var mapAnswerForHintChanges = mutableMapOf<Int, String>()
+    var mapUserBasedInput = mutableMapOf<Int, String>()
+
     fun newWordGuess(){
         wordToGuess = wordsPotential[(0 until lengthOfPotentialWords).toList().random()]
         lengthOfWord = wordToGuess.length
-        Log.v("WordToGuess", wordToGuess)
+        for (i in 0 until lengthOfWord){
+            mapAnswerForHintChanges[i] = wordToGuess[i].toString() //This is to store what place is which letter
+            mapUserBasedInput[i] = "?" //To have something in case there's nothing
+        }
     }
 
     fun updateUserGuess(mainRow:TableRow){

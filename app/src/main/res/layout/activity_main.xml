@@ -2,41 +2,44 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:ads ="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
-    <TextView
-        android:id="@+id/toptextcue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/actionCue"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022" />
 
     <TableLayout
         android:id="@+id/mainTable"
         android:layout_width="300dp"
         android:layout_height="500dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginBottom="116dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.315"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toptextcue"></TableLayout>
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"></TableLayout>
 
     <ImageButton
         android:id="@+id/validbutton"
         android:layout_width="50dp"
         android:layout_height="52dp"
         android:layout_gravity="center"
+        android:contentDescription="@string/buttonText"
+        android:src="@drawable/ic_baseline_done_wordnotbigenough"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/mainTable"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.148"
-        android:src = "@drawable/ic_baseline_done_wordnotbigenough"/>
+        tools:ignore="ImageContrastCheck" />
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/mainTable"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        ads:adUnitId= "ca-app-pub-3940256099942544/6300978111"
+        ads:adSize = "BANNER" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,7 @@ package com.example.definitelynotworlde.tableCreation
 
 import android.content.Context
 import android.content.res.Resources
+import android.renderscript.ScriptGroup
 import android.text.*
 import android.text.method.DigitsKeyListener
 import android.util.Log
@@ -78,8 +79,8 @@ class tableCreation {
             }
         }
 
-        fun SetupInputText(InputText: EditText, lengthOfWord: Int){
-            InputText.setHint(R.string.fill_boxes)
+        fun SetupInputText(InputText: EditText, lengthOfWord: Int, wordManager: WordManager, i: Int){
+            InputText.hint = wordManager.mapUserBasedInput[i].toString().toUpperCase() //So we replace the hint in case the user has selected right
             InputText.filters = arrayOf(InputFilter.LengthFilter(2), InputFilterTextOnly(),InputFilter.AllCaps())
             InputText.setRawInputType(InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_NORMAL or InputType.TYPE_TEXT_FLAG_CAP_WORDS)
             InputText.textSize = pixelConverterFromDP(20f).toFloat()
@@ -101,7 +102,7 @@ class tableCreation {
             for (i in 0 until lengthOfWord) { //Setup every single EditText in there
 
                 var newUserInputTextField = EditText(newTableRow.context)
-                SetupInputText(newUserInputTextField, lengthOfWord) // Take care of all the formatting
+                SetupInputText(newUserInputTextField, lengthOfWord, wordManager, i) // Take care of all the formatting
 
                 //For the click to force the input to be at the end of the case
                 newUserInputTextField.setOnClickListener(View.OnClickListener {

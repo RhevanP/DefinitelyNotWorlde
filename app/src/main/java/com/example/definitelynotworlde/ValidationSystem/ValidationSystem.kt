@@ -14,7 +14,6 @@ class ValidationSystem {
         fun validationSystem(rowActiveObject : TableRow, wordManager: WordManager){
             validationSubSystem(rowActiveObject, wordManager, "g")
             validationSubSystem(rowActiveObject, wordManager)
-//            Log.v("ComparisonWord", comparisonWord)
             comparisonWord = "" //So we reset for every guess
         }
 
@@ -34,6 +33,9 @@ class ValidationSystem {
                     editTextActive.setTextColor(Color.rgb(0,153,51)) //Green
                     comparisonWord += wordManager.userGuessString[i] //Storing in memory what was the letter to avoid duplicated yellow
                     editTextActive.isEnabled = false // Forced to repeat it since we do 2 loops : 1 for green, 1 for red/yellow
+                    wordManager.mapUserBasedInput[i] = wordManager.wordToGuess[i].toString() //Allows us to store things accordingly
+                    Log.v("ChangeMapUserInput", i.toString())
+                    Log.v("ChangeMapUserInput", wordManager.mapUserBasedInput.get(i).toString())
                 }
             }
 

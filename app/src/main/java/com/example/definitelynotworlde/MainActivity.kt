@@ -14,11 +14,13 @@ import com.example.definitelynotworlde.ValidationSystem.ValidationSystem
 import com.example.definitelynotworlde.WordManager.WordManager
 import com.example.definitelynotworlde.databinding.ActivityMainBinding
 import com.example.definitelynotworlde.tableCreation.tableCreation
+import com.google.android.gms.ads.*
 
 //import com.example.definitelynotworlde.tableCreation.tableCreation
 
 class MainActivity : AppCompatActivity() {
 
+    lateinit var mAdView: AdView
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +29,32 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //Google Ads Initialization
+        MobileAds.initialize(this){
+            Log.v("BANNER", "initialize Complete")
+        }
+
+        mAdView = binding.adView //The Ads Loads, Impression but is not displayed due to Google API Manager unavailable
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+
+        mAdView.adListener = object:AdListener(){
+            override fun onAdFailedToLoad(adError : LoadAdError) {
+                Log.v("BANNER", adError.toString())
+            }
+
+            override fun onAdImpression() {
+                // Code to be executed when an impression is recorded
+                // for an ad.
+                Log.v("BANNER", "impression")
+            }
+
+            override fun onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+                Log.v("BANNER", "Loaded")
+            }
+        }
 
         FocusManager.setContext(this) //create the context variable for using it in a static object!
         ButtonManager.setContext(this)
@@ -52,13 +80,13 @@ class MainActivity : AppCompatActivity() {
                     ValidationSystem.validationSystem(rowActiveObject, wordManager) // Validating user input and color code
                     mLastClickTime = SystemClock.elapsedRealtime() // Making sure the user can't spam the button
                     gameManager.tryRecording()
-                    if(wordManager.userGuessString == wordManager.wordToGuess.lowercase()){
+                    if(wordManager.userGuessString.equals(wordManager.wordToGuess, true)){
                         gameManager.gameOverWin()
-                        //TODO : buttonValidate changing to something to party the win
+                        ButtonManager.gameOverWin(buttonValidation)
                     }
                     else if (gameManager.livesLeft()){
-                        gameManager.gameOverLoose()
-                        //TODO : buttonValidate in red with a cross
+                        gameManager.gameOverLoose() //Triggers correctly
+                        ButtonManager.gameOverLoose(buttonValidation)
                     }
                     else{
                         rowActive += 1 //Changing what is the active row
@@ -68,20 +96,19 @@ class MainActivity : AppCompatActivity() {
                     }
 
                 }
-                else if(wordManager.userGuessString.length == 0){
+                else if(wordManager.userGuessString.isEmpty()){
                     alertManager.emptyInput(alertManager.alertUser)
                 }
                 else{
                     alertManager.inputSizeLower(alertManager.alertUser, wordManager.wordToGuess.length)
                 }
             }
+            else if (gameManager.gameState == 1){
+                ButtonManager.gameOverWinAnimation(buttonValidation)
+            }
+            else if(gameManager.gameState == -1){
+                ButtonManager.gameOverLooseAnimation(buttonValidation)
+            }
         }
-
-        //TODO : The focus doesn't change to the new line as expected
-        //TODO : Center the view when the inputs are BELOW the keyboard for the user
-        //TODO : Alert Manager should be saying the length of the word, not 5 by default.
-        //TODO : increase the number of words available
-        //TODO : Banners at the top instead of the text
-        //TODO : Reset button
     }
 }
